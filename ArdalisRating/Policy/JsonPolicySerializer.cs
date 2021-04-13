@@ -4,9 +4,9 @@ using System;
 
 namespace ArdalisRating.Policy
 {
-    public class PolicySerializer : IPolicySerializer
+    public class JsonPolicySerializer : IPolicySerializer
     {
-        public PolicyModel GetPolicyFromJson(string policyJson)
+        public PolicyModel GetPolicyFromJsonString(string policyJson)
         {
             return JsonConvert.DeserializeObject<PolicyModel>(policyJson,
                 new StringEnumConverter());

@@ -4,6 +4,6 @@ namespace ArdalisRating.Policy
 {
     public interface IPolicySerializer
     {
-        PolicyModel GetPolicyFromJson(string policyJson);
+        PolicyModel GetPolicyFromJsonString(string policyJson);
     }
 }
