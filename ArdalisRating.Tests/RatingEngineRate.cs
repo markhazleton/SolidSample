@@ -1,3 +1,4 @@
+using ArdalisRating.Policy;
 using Newtonsoft.Json;
 using System;
 using System.IO;
@@ -10,7 +11,7 @@ namespace ArdalisRating.Tests
 [Fact]
 public void ReturnsRatingOf10000For200000LandPolicy()
 {
-    var policy = new Policy
+    var policy = new Policy.PolicyModel
     {
         Type = PolicyType.Land,
         BondAmount = 200000,
@@ -29,7 +30,7 @@ public void ReturnsRatingOf10000For200000LandPolicy()
         [Fact]
         public void ReturnsRatingOf0For200000BondOn260000LandPolicy()
         {
-            var policy = new Policy
+            var policy = new Policy.PolicyModel
             {
                 Type = PolicyType.Land,
                 BondAmount = 200000,

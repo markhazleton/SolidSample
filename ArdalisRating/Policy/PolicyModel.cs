@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace ArdalisRating
+namespace ArdalisRating.Policy
 {
 
-    public class Policy
+    public class PolicyModel
     {
         public PolicyType Type { get; set; }
         #region Life Insurance
