@@ -1,45 +1,38 @@
 using ArdalisRating.Policy;
-using Newtonsoft.Json;
-using System;
-using System.IO;
+using ArdalisRating.Rating;
 using Xunit;
 
 namespace ArdalisRating.Tests
 {
     public class RatingEngineRate
     {
-[Fact]
-public void ReturnsRatingOf10000For200000LandPolicy()
-{
-    var policy = new Policy.PolicyModel
-    {
-        Type = PolicyType.Land,
-        BondAmount = 200000,
-        Valuation = 200000
-    };
-    string json = JsonConvert.SerializeObject(policy);
-    File.WriteAllText("policy.json", json);
-
-    var engine = new RatingEngine(policy);
-    engine.Rate();
-    var result = engine.Rating;
-
-    Assert.Equal(10000, result);
-}
+        [Fact]
+        public void ReturnsRatingOf10000For200000LandPolicy()
+        {
+            DefaultRatingContext context = new DefaultRatingContext();
+            var policy = new PolicyModel
+            {
+                Type = PolicyType.Land,
+                BondAmount = 200000,
+                Valuation = 200000
+            };
+            var engine = new RatingEngine(policy,context);
+            engine.Rate();
+            var result = engine.Rating;
+            Assert.Equal(10000, result);
+        }
 
         [Fact]
         public void ReturnsRatingOf0For200000BondOn260000LandPolicy()
         {
-            var policy = new Policy.PolicyModel
+            DefaultRatingContext context = new DefaultRatingContext();
+            var policy = new PolicyModel
             {
                 Type = PolicyType.Land,
                 BondAmount = 200000,
                 Valuation = 260000
             };
-            string json = JsonConvert.SerializeObject(policy);
-            File.WriteAllText("policy.json", json);
-
-            var engine = new RatingEngine(policy);
+            var engine = new RatingEngine(policy,context);
             engine.Rate();
             var result = engine.Rating;
 
