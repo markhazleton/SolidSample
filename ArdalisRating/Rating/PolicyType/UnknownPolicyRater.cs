@@ -1,16 +1,19 @@
-﻿using ArdalisRating.Policy;
+﻿using ArdalisRating.Logger;
+using ArdalisRating.Policy;
 
 namespace ArdalisRating.Rating.PolicyType
 {
     internal class UnknownPolicyRater : Rater
     {
-        public UnknownPolicyRater(IRatingUpdater ratingUpdater)
-            : base(ratingUpdater)
+        public UnknownPolicyRater(ILogger logger)
+            : base(logger)
         {
         }
-        public override void Rate(PolicyModel policy)
+        public override decimal Rate(PolicyModel policy)
         {
-            Logger.Log("Unknown policy type");
+            _logger.Log("Unknown policy type");
+            return 0;
         }
+
     }
 }

@@ -6,29 +6,28 @@ namespace ArdalisRating.Rating.PolicyType
 {
     public class LifePolicyRater : Rater
     {
-        public LifePolicyRater(IRatingUpdater ratingUpdater)
-            : base(ratingUpdater)
+        public LifePolicyRater(ILogger logger) : base(logger)
         {
         }
 
-        public override void Rate(PolicyModel policy)
+        public override decimal Rate(PolicyModel policy)
         {
-            Logger.Log("Rating LIFE policy...");
-            Logger.Log("Validating policy.");
+            _logger.Log("Rating LIFE policy...");
+            _logger.Log("Validating policy.");
             if (policy.DateOfBirth == DateTime.MinValue)
             {
-                Logger.Log("Life policy must include Date of Birth.");
-                return;
+                _logger.Log("Life policy must include Date of Birth.");
+                return 0;
             }
             if (policy.DateOfBirth < DateTime.Today.AddYears(-100))
             {
-                Logger.Log("Centenarians are not eligible for coverage.");
-                return;
+                _logger.Log("Centenarians are not eligible for coverage.");
+                return 0;
             }
             if (policy.Amount == 0)
             {
-                Logger.Log("Life policy must include an Amount.");
-                return;
+                _logger.Log("Life policy must include an Amount.");
+                return 0;
             }
             int age = DateTime.Today.Year - policy.DateOfBirth.Year;
             if (policy.DateOfBirth.Month == DateTime.Today.Month &&
@@ -40,10 +39,10 @@ namespace ArdalisRating.Rating.PolicyType
             decimal baseRate = policy.Amount * age / 200;
             if (policy.IsSmoker)
             {
-                _ratingUpdater.UpdateRating(baseRate * 2);
-                return;
+                return baseRate * 2;
             }
-            _ratingUpdater.UpdateRating(baseRate);
+
+            return baseRate;
         }
     }
 }

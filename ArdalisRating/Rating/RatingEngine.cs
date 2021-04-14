@@ -12,21 +12,24 @@ namespace ArdalisRating.Rating
     {
         public IPolicyRatingContext Context;
         public PolicyModel _policy;
+        protected readonly ILogger _logger;
+
         public decimal Rating { get; set; }
 
-        public RatingEngine(PolicyModel policy,IPolicyRatingContext context)
+        public RatingEngine(PolicyModel policy, IPolicyRatingContext context, ILogger logger)
         {
             _policy = policy;
             Context = context;
             Context.Engine = this;
+            _logger = logger;
         }
 
         public void Rate()
         {
-            Context.Log("Starting rate.");
-            var rater = Context.CreateRaterForPolicy(_policy, Context);
-            rater.Rate(_policy);
-            Context.Log("Rating completed.");
+            _logger.Log("Starting rate.");
+            var rater = Context.CreateRaterForPolicy(_policy, Context, _logger);
+            Rating = rater.Rate(_policy);
+            _logger.Log("Rating completed.");
         }
     }
 }

@@ -3,7 +3,7 @@ using System.IO;
 
 namespace ArdalisRating.Policy
 {
-    public class FilePolicySource : IFilePolicySource
+    public class FilePolicySource : IPolicySource
     {
         public string GetPolicyFromSource(string policyjson)
         {

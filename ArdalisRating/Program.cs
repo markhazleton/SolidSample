@@ -2,6 +2,7 @@
 using ArdalisRating.Policy;
 using ArdalisRating.Rating;
 using System;
+using System.Collections.Generic;
 
 namespace ArdalisRating
 {
@@ -10,28 +11,29 @@ namespace ArdalisRating
         static void Main(string[] args)
         {
             IPolicyRatingContext context = new DefaultRatingContext();
+            ILogger logger = new FileLogger();
 
-            context.Log("Ardalis Insurance Rating System Starting...");
+            logger.Log("Ardalis Insurance Rating System Starting...");
 
-            IFilePolicySource _policySource = new FilePolicySource();
+            IPolicySource _policySource = new FilePolicySource();
             IJsonPolicySerializer jsonPolicSerializer = new JsonPolicySerializer();
-            context.Log("Loading Policy Lists");
+            logger.Log("Loading Policy Lists");
             var mylist = jsonPolicSerializer.GetPolicyListFromJsonString(_policySource.GetPolicyFromSource("policyList.json"));
-            context.Log($"Found {mylist.Count} policies to process.");
+            logger.Log($"Found {mylist?.Count} policies to process.");
 
-            foreach (var policy in mylist)
+            foreach (var policy in mylist??new List<PolicyModel>())
             {
-                context.Log($"Process a {policy.Type} policy.");
-                var engine = new RatingEngine(policy,context);
+                logger.Log($"Process a {policy?.Type} policy.");
+                var engine = new RatingEngine(policy, context, logger);
                 engine.Rate();
 
                 if (engine?.Rating > 0)
                 {
-                    context.Log($"Rating: {engine.Rating}");
+                    logger.Log($"Rating: {engine.Rating}");
                 }
                 else
                 {
-                    Console.WriteLine("No rating produced.");
+                    logger.Log("No rating produced.");
                 }
             }
         }

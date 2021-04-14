@@ -9,9 +9,9 @@ namespace ArdalisRating
     {
         public RatingEngine Engine { get; set; }
 
-        public Rater CreateRaterForPolicy(PolicyModel policy, IPolicyRatingContext context)
+        public Rater CreateRaterForPolicy(PolicyModel policy, IPolicyRatingContext context, ILogger logger)
         {
-            return new RaterFactory().Create(policy, context);
+            return new RaterFactory().Create(policy, context, logger);
         }
 
         public PolicyModel GetPolicyFromJsonString(string policyJson)
@@ -32,11 +32,6 @@ namespace ArdalisRating
         public string LoadPolicyFromURI(string uri)
         {
             throw new NotImplementedException();
-        }
-
-        public void Log(string message)
-        {
-            new ConsoleLogger().Log(message);
         }
     }
 }

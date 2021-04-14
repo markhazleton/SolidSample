@@ -2,7 +2,7 @@
 
 namespace ArdalisRating.Policy
 {
-    public interface IFilePolicySource
+    public interface IPolicySource
     {
         string GetPolicyFromSource(string policyjson);
     }

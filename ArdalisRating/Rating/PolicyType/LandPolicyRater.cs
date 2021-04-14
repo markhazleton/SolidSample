@@ -1,29 +1,29 @@
-﻿using ArdalisRating.Policy;
+﻿using ArdalisRating.Logger;
+using ArdalisRating.Policy;
 
 namespace ArdalisRating.Rating.PolicyType
 {
     public class LandPolicyRater : Rater
     {
-        public LandPolicyRater(IRatingUpdater ratingUpdater)
-            : base(ratingUpdater)
+        public LandPolicyRater(ILogger logger) : base(logger)
         {
         }
 
-        public override void Rate(PolicyModel policy)
+        public override decimal Rate(PolicyModel policy)
         {
-            Logger.Log("Rating LAND policy...");
-            Logger.Log("Validating policy.");
+            _logger.Log("Rating LAND policy...");
+            _logger.Log("Validating policy.");
             if (policy.BondAmount == 0 || policy.Valuation == 0)
             {
-                Logger.Log("Land policy must specify Bond Amount and Valuation.");
-                return;
+                _logger.Log("Land policy must specify Bond Amount and Valuation.");
+                return 0;
             }
             if (policy.BondAmount < 0.8m * policy.Valuation)
             {
-                Logger.Log("Insufficient bond amount.");
-                return;
+                _logger.Log("Insufficient bond amount.");
+                return 0;
             }
-            _ratingUpdater.UpdateRating(policy.BondAmount * 0.05m);
+            return policy.BondAmount * 0.05m;
         }
     }
 }
