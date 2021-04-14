@@ -20,7 +20,7 @@ public void ReturnsRatingOf10000For200000LandPolicy()
     string json = JsonConvert.SerializeObject(policy);
     File.WriteAllText("policy.json", json);
 
-    var engine = new RatingEngine();
+    var engine = new RatingEngine(policy);
     engine.Rate();
     var result = engine.Rating;
 
@@ -39,7 +39,7 @@ public void ReturnsRatingOf10000For200000LandPolicy()
             string json = JsonConvert.SerializeObject(policy);
             File.WriteAllText("policy.json", json);
 
-            var engine = new RatingEngine();
+            var engine = new RatingEngine(policy);
             engine.Rate();
             var result = engine.Rating;
 

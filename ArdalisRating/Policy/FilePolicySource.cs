@@ -5,9 +5,9 @@ namespace ArdalisRating.Policy
 {
     public class FilePolicySource : IFilePolicySource
     {
-        public string GetPolicyFromSource()
+        public string GetPolicyFromSource(string policyjson)
         {
-            return File.ReadAllText("policy.json");
+            return File.ReadAllText(policyjson);
         }
     }
 }

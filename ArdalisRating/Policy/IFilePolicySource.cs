@@ -4,6 +4,6 @@ namespace ArdalisRating.Policy
 {
     public interface IFilePolicySource
     {
-        string GetPolicyFromSource();
+        string GetPolicyFromSource(string policyjson);
     }
 }

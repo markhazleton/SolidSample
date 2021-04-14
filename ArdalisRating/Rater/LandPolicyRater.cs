@@ -5,7 +5,7 @@ namespace ArdalisRating
 {
     public class LandPolicyRater : Rater
     {
-        public LandPolicyRater(RatingEngine engine, ConsoleLogger logger)
+        public LandPolicyRater(RatingEngine engine, IConsoleLogger logger)
             :base(engine,logger)
         {
         }

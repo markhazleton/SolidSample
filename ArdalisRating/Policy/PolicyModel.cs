@@ -5,6 +5,10 @@ namespace ArdalisRating.Policy
 
     public class PolicyModel
     {
+        public PolicyModel()
+        {
+            Type = PolicyType.Unknown;
+        }
         public PolicyType Type { get; set; }
         #region Life Insurance
         public string FullName { get; set; }
@@ -26,6 +30,10 @@ namespace ArdalisRating.Policy
         public int Year { get; set; }
         public int Miles { get; set; }
         public decimal Deductible { get; set; }
+        #endregion
+
+        #region Flood
+        public int ElevationAboveSeaLevelFeet { get; internal set; }
         #endregion
 
     }

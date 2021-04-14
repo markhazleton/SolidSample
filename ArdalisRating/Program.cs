@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ArdalisRating.Policy;
+using System;
 
 namespace ArdalisRating
 {
@@ -6,20 +7,27 @@ namespace ArdalisRating
     {
         static void Main(string[] args)
         {
+
             Console.WriteLine("Ardalis Insurance Rating System Starting...");
 
-            var engine = new RatingEngine();
-            engine.Rate();
+            IFilePolicySource _policySource = new FilePolicySource();
+            IJsonPolicySerializer jsonPolicSerializer = new JsonPolicySerializer();
+            var mylist = jsonPolicSerializer.GetPolicyListFromJsonString(_policySource.GetPolicyFromSource("policyList.json"));
 
-            if (engine.Rating > 0)
+            foreach (var policy in mylist)
             {
-                Console.WriteLine($"Rating: {engine.Rating}");
-            }
-            else
-            {
-                Console.WriteLine("No rating produced.");
-            }
+                var engine = new RatingEngine(policy);
+                engine?.Rate();
 
+                if (engine?.Rating > 0)
+                {
+                    Console.WriteLine($"Rating: {engine.Rating}");
+                }
+                else
+                {
+                    Console.WriteLine("No rating produced.");
+                }
+            }
         }
     }
 }
