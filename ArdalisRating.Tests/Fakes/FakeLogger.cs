@@ -1,9 +1,7 @@
-using ArdalisRating.Logger;
-using ArdalisRating.Policy;
-using ArdalisRating.Rating;
+using ArdalisRating.Core.Interfaces;
 using System.Collections.Generic;
 
-namespace ArdalisRating.Tests
+namespace ArdalisRating.Tests.Fakes
 {
     public class FakeLogger : ILogger
     {
