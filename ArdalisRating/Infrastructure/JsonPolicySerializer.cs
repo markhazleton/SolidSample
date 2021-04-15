@@ -7,14 +7,15 @@ using System.Collections.Generic;
 
 namespace ArdalisRating.Infrastructure
 {
-    public class JsonPolicySerializer : IJsonPolicySerializer
+    public class JsonPolicySerializer : IPolicySerializer
     {
-        public PolicyModel GetPolicyFromJsonString(string policyJson)
+        public IPolicyModel GetPolicyFromString(string policyJson)
         {
             try
             {
-                return JsonConvert.DeserializeObject<PolicyModel>(policyJson,
+                var myPolicy = JsonConvert.DeserializeObject<PolicyModel>(policyJson,
                     new StringEnumConverter());
+                return myPolicy;
             }
             catch
             {
@@ -22,7 +23,7 @@ namespace ArdalisRating.Infrastructure
             }
         }
 
-        public List<PolicyModel> GetPolicyListFromJsonString(string policyJson)
+        public List<PolicyModel> GetPolicyListFromString(string policyJson)
         {
             try
             {
@@ -31,7 +32,8 @@ namespace ArdalisRating.Infrastructure
             }
             catch
             {
-                return new List<PolicyModel>();
+                var myList = new List<PolicyModel>();
+                return myList;
             }
         }
     }

@@ -6,9 +6,20 @@ namespace ArdalisRating.Infrastructure
 {
     public class FilePolicySource : IPolicySource
     {
-        public string GetPolicyFromSource(string policyjson)
+        /// <summary>
+        /// Constructor 
+        /// </summary>
+        public FilePolicySource(string fileName)
         {
-            return File.ReadAllText(policyjson);
+            PolicySource = fileName;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string PolicySource { get; set; }
+        public string GetPolicyFromSource()
+        {
+            return File.ReadAllText(PolicySource);
         }
     }
 }

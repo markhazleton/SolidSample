@@ -1,9 +1,9 @@
-﻿using System;
+﻿using ArdalisRating.Core.Interfaces;
+using System;
 
 namespace ArdalisRating.Core.Models
 {
-
-    public class PolicyModel
+    public class PolicyModel : IPolicyModel
     {
         public PolicyModel()
         {

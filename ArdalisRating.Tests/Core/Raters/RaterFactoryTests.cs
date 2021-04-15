@@ -1,7 +1,7 @@
 ﻿using ArdalisRating.Core.Interfaces;
 using ArdalisRating.Core.Models;
 using ArdalisRating.Core.Raters;
-using ArdalisRating.Tests.Fakes;
+using ArdalisRating.Infrastructure.Logger;
 using Xunit;
 
 namespace ArdalisRating.Tests.Core.Raters
@@ -14,7 +14,7 @@ namespace ArdalisRating.Tests.Core.Raters
             // Arrange
             var factory = new RaterFactory();
             PolicyModel policy = new();
-            ILogger logger = new FakeLogger();
+            IBatchLogger logger = new InMemoryLogger();
 
             // Act
             var result = factory.Create(

@@ -1,0 +1,190 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ArdalisRatingWebApi</name>
+    </assembly>
+    <members>
+        <member name="T:ArdalisRatingWebApi.Controllers.api.BaseApiControllerBase">
+            <summary>
+            Base Api Controller
+            </summary>
+        </member>
+        <member name="T:ArdalisRatingWebApi.Controllers.api.RateController">
+            <summary>
+            Rate API
+            </summary>
+        </member>
+        <member name="M:ArdalisRatingWebApi.Controllers.api.RateController.#ctor(ArdalisRating.Core.Interfaces.IPolicySource,ArdalisRating.Core.Interfaces.IPolicySerializer,ArdalisRating.Core.Interfaces.IRatingEngine)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="policySource"></param>
+            <param name="policySerializer"></param>
+            <param name="ratingEngine"></param>
+        </member>
+        <member name="M:ArdalisRatingWebApi.Controllers.api.RateController.Rate(System.String)">
+            <summary>
+            Rate a Policy from Json string passed in
+            </summary>
+            <param name="policy"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ArdalisRatingWebApi.Controllers.api.ValuesController">
+            <summary>
+            Values Api Controller
+            </summary>
+        </member>
+        <member name="M:ArdalisRatingWebApi.Controllers.api.ValuesController.Get">
+            <summary>
+            Get Values
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ArdalisRatingWebApi.Controllers.api.ValuesController.Get(System.Int32)">
+            <summary>
+            Get Value by Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ArdalisRatingWebApi.Controllers.api.ValuesController.Post(System.String)">
+            <summary>
+            Post Value
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:ArdalisRatingWebApi.Controllers.api.ValuesController.Put(System.Int32,System.String)">
+            <summary>
+            Update existing value
+            </summary>
+            <param name="id"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:ArdalisRatingWebApi.Controllers.api.ValuesController.Delete(System.Int32)">
+            <summary>
+            Delete existing Value
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="T:ArdalisRatingWebApi.Controllers.BaseController">
+            <summary>
+            Base Controller for MVC Controllers
+            </summary>
+        </member>
+        <member name="T:ArdalisRatingWebApi.Controllers.HomeController">
+            <summary>
+            Home
+            </summary>
+        </member>
+        <member name="M:ArdalisRatingWebApi.Controllers.HomeController.#ctor(Microsoft.Extensions.Logging.ILogger{ArdalisRatingWebApi.Controllers.HomeController})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:ArdalisRatingWebApi.Controllers.HomeController.Index">
+            <summary>
+            Default Page
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ArdalisRatingWebApi.Controllers.HomeController.Privacy">
+            <summary>
+            Privacy Policy
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ArdalisRatingWebApi.Controllers.HomeController.Error">
+            <summary>
+            Error Page
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ArdalisRatingWebApi.Models.ErrorViewModel">
+            <summary>
+            Error View
+            </summary>
+        </member>
+        <member name="P:ArdalisRatingWebApi.Models.ErrorViewModel.RequestId">
+            <summary>
+            Request Id
+            </summary>
+        </member>
+        <member name="P:ArdalisRatingWebApi.Models.ErrorViewModel.ShowRequestId">
+            <summary>
+            Show Request Id
+            </summary>
+        </member>
+        <member name="T:ArdalisRatingWebApi.Program">
+            <summary>
+            Program
+            </summary>
+        </member>
+        <member name="M:ArdalisRatingWebApi.Program.Main(System.String[])">
+            <summary>
+            Main
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:ArdalisRatingWebApi.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            Create Host Builder
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ArdalisRatingWebApi.RawJsonBodyInputFormatter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ArdalisRatingWebApi.RawJsonBodyInputFormatter.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ArdalisRatingWebApi.RawJsonBodyInputFormatter.ReadRequestBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ArdalisRatingWebApi.RawJsonBodyInputFormatter.CanReadType(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ArdalisRatingWebApi.Startup">
+            <summary>
+            Startup for Core Web Application
+            </summary>
+        </member>
+        <member name="M:ArdalisRatingWebApi.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Startup constructor with configuration parameter
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:ArdalisRatingWebApi.Startup.Configuration">
+            <summary>
+            Configuration
+            </summary>
+        </member>
+        <member name="M:ArdalisRatingWebApi.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configure Services
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:ArdalisRatingWebApi.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
+    </members>
+</doc>

@@ -4,6 +4,7 @@ namespace ArdalisRating.Core.Interfaces
 {
     public interface IPolicySource
     {
-        string GetPolicyFromSource(string policyjson);
+        string PolicySource { get; set; }
+        string GetPolicyFromSource();
     }
 }

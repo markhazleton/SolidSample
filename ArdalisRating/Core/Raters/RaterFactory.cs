@@ -1,18 +1,24 @@
 ﻿using ArdalisRating.Core.Interfaces;
-using ArdalisRating.Core.Models;
 using ArdalisRating.Core.Raters.PolicyType;
 using System;
 
 namespace ArdalisRating.Core.Raters
 {
-    public class RaterFactory
+    /// <summary>
+    /// Rater Factory
+    /// </summary>
+    public class RaterFactory : IRaterFactory
     {
-        public Rater Create(PolicyModel policy, ILogger logger)
+        public RaterFactory()
+        {
+        }
+
+        public Rater Create(IPolicyModel policy, IBatchLogger logger)
         {
             try
             {
                 return (Rater)Activator.CreateInstance(
-                    Type.GetType($"ArdalisRating.Rating.PolicyType.{policy.Type}PolicyRater"),
+                    Type.GetType($"ArdalisRating.Core.Raters.PolicyType.{policy.Type}PolicyRater"),
                         new object[] { logger });
             }
             catch

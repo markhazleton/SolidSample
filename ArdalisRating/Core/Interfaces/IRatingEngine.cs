@@ -4,7 +4,8 @@ namespace ArdalisRating.Core.Interfaces
 {
     public interface IRatingEngine
     {
-        void Rate();
+        string GetLogMessage();
+        void Rate(IPolicyModel policy);
 
         decimal Rating { get; set; }
     }

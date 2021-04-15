@@ -6,18 +6,19 @@ namespace ArdalisRating.Core.Raters.PolicyType
 {
     public class AutoPolicyRater : Rater
     {
-        public AutoPolicyRater(ILogger logger)
+        public AutoPolicyRater(IBatchLogger logger)
             : base(logger)
         {
         }
 
-        public override decimal Rate(PolicyModel policy)
+        public override decimal Rate(IPolicyModel policy)
         {
-            _logger.Log("Rating AUTO policy...");
-            _logger.Log("Validating policy.");
+            _InMemory.Log("Rating AUTO policy...");
+            _InMemory.Log("Validating policy.");
             if (String.IsNullOrEmpty(policy.Make))
             {
-                _logger.Log("Auto policy must specify Make");
+                _InMemory.Log("Auto policy must specify Make");
+                return 0;
             }
             if (string.Compare(policy.Make, "BMW", StringComparison.Ordinal) == 0)
             {
@@ -27,6 +28,7 @@ namespace ArdalisRating.Core.Raters.PolicyType
                 }
                 return 900m;
             }
+            _InMemory.Log("Unable to rate policy");
             return 0;
         }
     }
