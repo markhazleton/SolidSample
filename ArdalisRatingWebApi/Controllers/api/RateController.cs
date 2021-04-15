@@ -10,24 +10,19 @@ namespace ArdalisRatingWebApi.Controllers.api
     [ApiController]
     public class RateController : ControllerBase
     {
-        private readonly IPolicySource _policySource;
         private readonly IPolicySerializer _policySerializer;
         private readonly IRatingEngine _ratingEngine;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="policySource"></param>
         /// <param name="policySerializer"></param>
         /// <param name="ratingEngine"></param>
-        public RateController(IPolicySource policySource, 
-            IPolicySerializer policySerializer, 
+        public RateController(IPolicySerializer policySerializer, 
             IRatingEngine ratingEngine)
         {
-            _policySource = policySource;
             _policySerializer = policySerializer;
             _ratingEngine = ratingEngine;
-
         }
 
         /// <summary>
@@ -38,8 +33,7 @@ namespace ArdalisRatingWebApi.Controllers.api
         [HttpPost()]
         public ActionResult<decimal> Rate([FromBody] string policy)
         {
-            _policySource.PolicySource = policy;
-            var myPolicy = _policySerializer.GetPolicyFromString(_policySource.GetPolicyFromSource());
+            var myPolicy = _policySerializer.GetPolicyFromString(policy);
             _ratingEngine.Rate(myPolicy);
             if(_ratingEngine.Rating>0) 
                 return _ratingEngine.Rating;

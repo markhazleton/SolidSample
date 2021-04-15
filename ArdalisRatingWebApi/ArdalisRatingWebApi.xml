@@ -14,11 +14,10 @@
             Rate API
             </summary>
         </member>
-        <member name="M:ArdalisRatingWebApi.Controllers.api.RateController.#ctor(ArdalisRating.Core.Interfaces.IPolicySource,ArdalisRating.Core.Interfaces.IPolicySerializer,ArdalisRating.Core.Interfaces.IRatingEngine)">
+        <member name="M:ArdalisRatingWebApi.Controllers.api.RateController.#ctor(ArdalisRating.Core.Interfaces.IPolicySerializer,ArdalisRating.Core.Interfaces.IRatingEngine)">
             <summary>
             Constructor
             </summary>
-            <param name="policySource"></param>
             <param name="policySerializer"></param>
             <param name="ratingEngine"></param>
         </member>
