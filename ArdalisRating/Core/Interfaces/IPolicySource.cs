@@ -1,10 +1,9 @@
-﻿using System;
-
-namespace ArdalisRating.Core.Interfaces
+﻿namespace ArdalisRating.Core.Interfaces
 {
     public interface IPolicySource
     {
         string PolicySource { get; set; }
+
         string GetPolicyFromSource();
     }
 }

@@ -1,5 +1,4 @@
 ﻿using ArdalisRating.Core.Interfaces;
-using ArdalisRating.Core.Models;
 using System;
 
 namespace ArdalisRating.Core.Raters.PolicyType

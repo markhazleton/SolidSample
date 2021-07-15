@@ -1,18 +1,17 @@
 using Microsoft.AspNetCore.Mvc.Formatters;
 using System;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ArdalisRatingWebApi
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public class RawJsonBodyInputFormatter : InputFormatter
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public RawJsonBodyInputFormatter()
         {
@@ -20,7 +19,7 @@ namespace ArdalisRatingWebApi
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
@@ -35,7 +34,7 @@ namespace ArdalisRatingWebApi
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>

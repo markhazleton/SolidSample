@@ -133,28 +133,28 @@
             <returns></returns>
         </member>
         <member name="T:ArdalisRatingWebApi.RawJsonBodyInputFormatter">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="M:ArdalisRatingWebApi.RawJsonBodyInputFormatter.#ctor">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="M:ArdalisRatingWebApi.RawJsonBodyInputFormatter.ReadRequestBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="context"></param>
-            <returns></returns>
+             </summary>
+             <param name="context"></param>
+             <returns></returns>
         </member>
         <member name="M:ArdalisRatingWebApi.RawJsonBodyInputFormatter.CanReadType(System.Type)">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="type"></param>
-            <returns></returns>
+             </summary>
+             <param name="type"></param>
+             <returns></returns>
         </member>
         <member name="T:ArdalisRatingWebApi.Startup">
             <summary>

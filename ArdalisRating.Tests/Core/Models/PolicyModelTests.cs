@@ -1,5 +1,4 @@
 ﻿using ArdalisRating.Core.Models;
-using System;
 using Xunit;
 
 namespace ArdalisRating.Tests.Core.Models
@@ -13,7 +12,6 @@ namespace ArdalisRating.Tests.Core.Models
             var policyModel = new PolicyModel();
 
             // Act
-
 
             // Assert
             Assert.NotNull(policyModel);

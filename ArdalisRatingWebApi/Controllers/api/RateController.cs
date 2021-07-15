@@ -18,7 +18,7 @@ namespace ArdalisRatingWebApi.Controllers.api
         /// </summary>
         /// <param name="policySerializer"></param>
         /// <param name="ratingEngine"></param>
-        public RateController(IPolicySerializer policySerializer, 
+        public RateController(IPolicySerializer policySerializer,
             IRatingEngine ratingEngine)
         {
             _policySerializer = policySerializer;
@@ -35,12 +35,10 @@ namespace ArdalisRatingWebApi.Controllers.api
         {
             var myPolicy = _policySerializer.GetPolicyFromString(policy);
             _ratingEngine.Rate(myPolicy);
-            if(_ratingEngine.Rating>0) 
+            if (_ratingEngine.Rating > 0)
                 return _ratingEngine.Rating;
 
-                       
             return BadRequest(_ratingEngine.GetLogMessage());
-
         }
     }
 }

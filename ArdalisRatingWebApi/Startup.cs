@@ -5,22 +5,17 @@ using ArdalisRating.Infrastructure;
 using ArdalisRating.Infrastructure.Logger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ArdalisRatingWebApi
 {
-        /// <summary>
-        /// Startup for Core Web Application
-        /// </summary>
-        public class Startup
+    /// <summary>
+    /// Startup for Core Web Application
+    /// </summary>
+    public class Startup
     {
         /// <summary>
         /// Startup constructor with configuration parameter
@@ -58,8 +53,8 @@ namespace ArdalisRatingWebApi
             services.AddScoped<StringPolicySource>();
             services.AddScoped<IPolicySource, StringPolicySource>(sp => sp.GetRequiredService<StringPolicySource>());
             services.AddScoped<IPolicySerializer, JsonPolicySerializer>();
-            services.AddScoped<IRaterFactory,RaterFactory>();
-            services.AddScoped<IRatingEngine,RatingEngine>();
+            services.AddScoped<IRaterFactory, RaterFactory>();
+            services.AddScoped<IRatingEngine, RatingEngine>();
         }
 
         /// <summary>
@@ -72,7 +67,6 @@ namespace ArdalisRatingWebApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-
             }
             else
             {

@@ -4,7 +4,7 @@ using System;
 namespace ArdalisRating.Core
 {
     /// <summary>
-    /// The RatingEngine reads the policy application details from a file and produces a numeric 
+    /// The RatingEngine reads the policy application details from a file and produces a numeric
     /// rating value based on the details.
     /// </summary>
     public class RatingEngine : IRatingEngine
@@ -13,7 +13,8 @@ namespace ArdalisRating.Core
         private readonly IRaterFactory _raterFactory;
 
         public decimal Rating { get; set; }
-        public string GetLogMessage() 
+
+        public string GetLogMessage()
         {
             return String.Join(";", _logger.LogList());
         }

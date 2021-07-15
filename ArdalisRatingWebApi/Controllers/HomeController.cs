@@ -1,9 +1,7 @@
 ﻿using ArdalisRatingWebApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Diagnostics;
-using System.Linq;
 
 namespace ArdalisRatingWebApi.Controllers
 {

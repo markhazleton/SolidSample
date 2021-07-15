@@ -1,5 +1,5 @@
-﻿using System;
-using ArdalisRating.Core.Models;
+﻿using ArdalisRating.Core.Models;
+using System;
 
 namespace ArdalisRating.Core.Interfaces
 {

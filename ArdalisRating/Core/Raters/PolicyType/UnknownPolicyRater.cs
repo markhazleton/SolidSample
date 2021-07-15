@@ -8,6 +8,7 @@ namespace ArdalisRating.Core.Raters.PolicyType
             : base(logger)
         {
         }
+
         public override decimal Rate(IPolicyModel policy)
         {
             _InMemory.Log("Unknown policy type");

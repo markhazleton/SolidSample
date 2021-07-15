@@ -12,13 +12,13 @@ namespace ArdalisRating.UI
     /// <summary>
     /// Program
     /// </summary>
-    class Program
+    internal class Program
     {
         /// <summary>
         /// Main
         /// </summary>
         /// <param name="args"></param>
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             IBatchLogger logger = new InMemoryLogger();
             IRatingEngine engine;
@@ -65,7 +65,6 @@ namespace ArdalisRating.UI
             {
                 Console.WriteLine(message);
             }
-
         }
     }
 }
