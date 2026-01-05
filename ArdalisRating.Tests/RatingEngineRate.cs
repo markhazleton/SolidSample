@@ -1,80 +1,98 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json;
 using Xunit;
 
-namespace ArdalisRating.Tests
+namespace ArdalisRating.Tests;
+
+public class RatingEngineRate
 {
-    public class RatingEngineRate
+    private readonly RatingEngine _engine;
+    private readonly FakeLogger _logger;
+    private readonly FakePolicySource _policySource;
+    private readonly JsonPolicySerializer _policySerializer;
+
+    public RatingEngineRate()
     {
-        private RatingEngine _engine = null;
-        private FakeLogger _logger;
-        private FakePolicySource _policySource;
-        private JsonPolicySerializer _policySerializer;
-        public RatingEngineRate()
+        _logger = new FakeLogger();
+        _policySource = new FakePolicySource();
+        _policySerializer = new JsonPolicySerializer();
+
+        _engine = new RatingEngine(
+            _logger,
+            _policySource,
+            _policySerializer,
+            new RaterFactory(_logger));
+    }
+
+    [Fact]
+    public void ReturnsRatingOf10000For200000LandPolicy()
+    {
+        var policy = new Policy
         {
-            _logger = new FakeLogger();
-            _policySource = new FakePolicySource();
-            _policySerializer = new JsonPolicySerializer();
+            Type = "Land",
+            BondAmount = 200000,
+            Valuation = 200000
+        };
+        string json = JsonSerializer.Serialize(policy);
+        _policySource.PolicyString = json;
 
-            _engine = new RatingEngine(_logger,
-                _policySource,
-                _policySerializer,
-                new RaterFactory(_logger));
-        }
+        _engine.Rate();
+        var result = _engine.Rating;
 
-        [Fact]
-        public void ReturnsRatingOf10000For200000LandPolicy()
+        Assert.Equal(10000, result);
+    }
+
+    [Fact]
+    public void ReturnsRatingOf0For200000BondOn260000LandPolicy()
+    {
+        var policy = new Policy
         {
-            var policy = new Policy
-            {
-                Type = "Land",
-                BondAmount = 200000,
-                Valuation = 200000
-            };
-            string json = JsonConvert.SerializeObject(policy);
-            _policySource.PolicyString = json;
+            Type = "Land",
+            BondAmount = 200000,
+            Valuation = 260000
+        };
+        string json = JsonSerializer.Serialize(policy);
+        _policySource.PolicyString = json;
 
-            _engine.Rate();
-            var result = _engine.Rating;
+        _engine.Rate();
+        var result = _engine.Rating;
 
-            Assert.Equal(10000, result);
-        }
+        Assert.Equal(0, result);
+    }
 
-        [Fact]
-        public void ReturnsRatingOf0For200000BondOn260000LandPolicy()
+    [Fact]
+    public void LogsStartingLoadingAndCompleting()
+    {
+        var policy = new Policy
         {
-            var policy = new Policy
-            {
-                //Type = PolicyType.Land,
-                BondAmount = 200000,
-                Valuation = 260000
-            };
-            string json = JsonConvert.SerializeObject(policy);
-            _policySource.PolicyString = json;
+            Type = "Land",
+            BondAmount = 200000,
+            Valuation = 260000
+        };
+        string json = JsonSerializer.Serialize(policy);
+        _policySource.PolicyString = json;
 
-            _engine.Rate();
-            var result = _engine.Rating;
+        _engine.Rate();
 
-            Assert.Equal(0, result);
-        }
+        Assert.Contains(_logger.LoggedMessages, m => m == "Starting rate.");
+        Assert.Contains(_logger.LoggedMessages, m => m == "Loading policy.");
+        Assert.Contains(_logger.LoggedMessages, m => m == "Rating completed.");
+    }
 
-        [Fact]
-        public void LogsStartingLoadingAndCompleting()
+    [Fact]
+    public async Task RateAsyncReturnsExpectedRating()
+    {
+        var policy = new Policy
         {
-            var policy = new Policy
-            {
-                Type = "Land",
-                BondAmount = 200000,
-                Valuation = 260000
-            };
-            string json = JsonConvert.SerializeObject(policy);
-            _policySource.PolicyString = json;
+            Type = "Land",
+            BondAmount = 200000,
+            Valuation = 200000
+        };
+        string json = JsonSerializer.Serialize(policy);
+        _policySource.PolicyString = json;
 
-            _engine.Rate();
-            var result = _engine.Rating;
+        await _engine.RateAsync();
+        var result = _engine.Rating;
 
-            Assert.Contains(_logger.LoggedMessages, m => m == "Starting rate.");
-            Assert.Contains(_logger.LoggedMessages, m => m == "Loading policy.");
-            Assert.Contains(_logger.LoggedMessages, m => m == "Rating completed.");
-        }
+        Assert.Equal(10000, result);
     }
 }

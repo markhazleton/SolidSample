@@ -1,12 +1,9 @@
-﻿using System;
+﻿namespace ArdalisRating;
 
-namespace ArdalisRating
+public class ConsoleLogger : ILogger
 {
-    public class ConsoleLogger : ILogger
+    public void Log(string message)
     {
-        public void Log(string message)
-        {
-            Console.WriteLine(message);
-        }
+        Console.WriteLine(message);
     }
 }

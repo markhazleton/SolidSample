@@ -12,6 +12,7 @@ namespace ArdalisRating.Tests
 
             var result = serializer.GetPolicyFromString(inputJson);
 
+            Assert.NotNull(result);
             var policy = new Policy();
             AssertPoliciesEqual(result, policy);
         }
@@ -28,10 +29,27 @@ namespace ArdalisRating.Tests
 
             var result = serializer.GetPolicyFromString(inputJson);
 
-            var policy = new Policy {
+            Assert.NotNull(result);
+            var policy = new Policy
+            {
                 Type = "Auto",
-                Make = "BMW" };
+                Make = "BMW"
+            };
             AssertPoliciesEqual(result, policy);
+        }
+
+        [Fact]
+        public void ReturnsNullForNullOrWhitespaceInput()
+        {
+            var serializer = new JsonPolicySerializer();
+
+            var result1 = serializer.GetPolicyFromString(null!);
+            var result2 = serializer.GetPolicyFromString("");
+            var result3 = serializer.GetPolicyFromString("   ");
+
+            Assert.Null(result1);
+            Assert.Null(result2);
+            Assert.Null(result3);
         }
 
         private static void AssertPoliciesEqual(Policy result, Policy policy)

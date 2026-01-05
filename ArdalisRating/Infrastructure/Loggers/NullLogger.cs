@@ -1,9 +1,9 @@
-﻿namespace ArdalisRating
+﻿namespace ArdalisRating;
+
+public class NullLogger : ILogger
 {
-    public class NullLogger : ILogger
+    public void Log(string message)
     {
-        public void Log(string message)
-        {
-        }
+        // No-op logger
     }
 }

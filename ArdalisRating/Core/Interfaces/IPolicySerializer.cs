@@ -1,10 +1,7 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿namespace ArdalisRating;
 
-namespace ArdalisRating
+public interface IPolicySerializer
 {
-    public interface IPolicySerializer
-    {
-        Policy GetPolicyFromString(string policyString);
-    }
+    Task<Policy?> GetPolicyFromStringAsync(string policyString, CancellationToken cancellationToken = default);
+    Policy? GetPolicyFromString(string policyString); // Keep for backward compatibility
 }

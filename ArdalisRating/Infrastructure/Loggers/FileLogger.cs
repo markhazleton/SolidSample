@@ -1,16 +1,13 @@
-﻿using System.IO;
+﻿namespace ArdalisRating;
 
-namespace ArdalisRating
+public class FileLogger : ILogger
 {
-    public class FileLogger : ILogger
+    private const string LogFileName = "log.txt";
+
+    public void Log(string message)
     {
-        public void Log(string message)
-        {
-            using (var stream = File.AppendText("log.txt"))
-            {
-                stream.WriteLine(message);
-                stream.Flush();
-            }
-        }
+        using var stream = File.AppendText(LogFileName);
+        stream.WriteLine(message);
+        stream.Flush();
     }
 }

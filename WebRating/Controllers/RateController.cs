@@ -1,29 +1,34 @@
 ﻿using ArdalisRating;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebRating.Controllers
+namespace WebRating.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class RateController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class RateController : ControllerBase
+    private readonly RatingEngine _ratingEngine;
+    private readonly StringPolicySource _policySource;
+
+    public RateController(RatingEngine ratingEngine, StringPolicySource policySource)
     {
-        private readonly RatingEngine _ratingEngine;
-        private readonly StringPolicySource _policySource;
+        _ratingEngine = ratingEngine ?? throw new ArgumentNullException(nameof(ratingEngine));
+        _policySource = policySource ?? throw new ArgumentNullException(nameof(policySource));
+    }
 
-        public RateController(RatingEngine ratingEngine,
-            StringPolicySource policySource)
+    [HttpPost]
+    public async Task<ActionResult<decimal>> Rate(
+        [FromBody] string policy,
+        CancellationToken cancellationToken)
+    {
+        if (string.IsNullOrWhiteSpace(policy))
         {
-            _ratingEngine = ratingEngine;
-            _policySource = policySource;
+            return BadRequest("Policy data is required.");
         }
 
-        [HttpPost()]
-        public ActionResult<decimal> Rate([FromBody] string policy)
-        {
-            _policySource.PolicyString = policy;
-            _ratingEngine.Rate();
+        _policySource.PolicyString = policy;
+        await _ratingEngine.RateAsync(cancellationToken);
 
-            return _ratingEngine.Rating;
-        }
+        return Ok(_ratingEngine.Rating);
     }
 }

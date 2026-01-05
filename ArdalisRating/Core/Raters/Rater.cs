@@ -1,14 +1,13 @@
-﻿namespace ArdalisRating
+﻿namespace ArdalisRating;
+
+public abstract class Rater
 {
-    public abstract class Rater
+    protected ILogger Logger { get; }
+
+    protected Rater(ILogger logger)
     {
-        public ILogger Logger { get; set; }
-
-        public Rater(ILogger logger)
-        {
-            Logger = logger;
-        }
-
-        public abstract decimal Rate(Policy policy);
+        Logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
+
+    public abstract decimal Rate(Policy policy);
 }

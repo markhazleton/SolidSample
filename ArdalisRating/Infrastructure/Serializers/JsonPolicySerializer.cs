@@ -1,15 +1,34 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 
-namespace ArdalisRating
+namespace ArdalisRating;
+
+public class JsonPolicySerializer : IPolicySerializer
 {
-
-    public class JsonPolicySerializer : IPolicySerializer
+    private static readonly JsonSerializerOptions Options = new()
     {
-        public Policy GetPolicyFromString(string policyString)
+        PropertyNameCaseInsensitive = true,
+        Converters = { new JsonStringEnumConverter() }
+    };
+
+    public Policy? GetPolicyFromString(string policyString)
+    {
+        if (string.IsNullOrWhiteSpace(policyString))
         {
-            return JsonConvert.DeserializeObject<Policy>(policyString,
-                new StringEnumConverter());
+            return null;
         }
+
+        return JsonSerializer.Deserialize<Policy>(policyString, Options);
+    }
+
+    public async Task<Policy?> GetPolicyFromStringAsync(string policyString, CancellationToken cancellationToken = default)
+    {
+        if (string.IsNullOrWhiteSpace(policyString))
+        {
+            return null;
+        }
+
+        using var stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(policyString));
+        return await JsonSerializer.DeserializeAsync<Policy>(stream, Options, cancellationToken);
     }
 }

@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
+﻿namespace ArdalisRating.Tests;
 
-namespace ArdalisRating.Tests
+public class FakeLogger : ILogger
 {
-    public class FakeLogger : ILogger
+    public List<string> LoggedMessages { get; } = new();
+
+    public void Log(string message)
     {
-        public List<string> LoggedMessages { get; } = new List<string>();
-        public void Log(string message)
-        {
-            LoggedMessages.Add(message);
-        }
+        LoggedMessages.Add(message);
     }
 }

@@ -1,28 +1,34 @@
-﻿using System;
+﻿namespace ArdalisRating;
 
-namespace ArdalisRating
+public class RaterFactory
 {
-    public class RaterFactory
-    {
-        private readonly ILogger _logger;
+    private readonly ILogger _logger;
 
-        public RaterFactory(ILogger logger)
+    public RaterFactory(ILogger logger)
+    {
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+    }
+
+    public Rater Create(Policy policy)
+    {
+        ArgumentNullException.ThrowIfNull(policy);
+
+        var raterTypeName = $"ArdalisRating.{policy.Type}PolicyRater";
+        var raterType = Type.GetType(raterTypeName);
+
+        if (raterType is null)
         {
-            _logger = logger;
+            return new UnknownPolicyRater(_logger);
         }
 
-        public Rater Create(Policy policy)
+        try
         {
-            try
-            {
-                return (Rater)Activator.CreateInstance(
-                    Type.GetType($"ArdalisRating.{policy.Type}PolicyRater"),
-                        new object[] { _logger });
-            }
-            catch
-            {
-                return new UnknownPolicyRater(_logger);
-            }
+            var rater = Activator.CreateInstance(raterType, _logger) as Rater;
+            return rater ?? new UnknownPolicyRater(_logger);
+        }
+        catch
+        {
+            return new UnknownPolicyRater(_logger);
         }
     }
 }

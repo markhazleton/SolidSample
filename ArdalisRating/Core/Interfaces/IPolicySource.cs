@@ -1,7 +1,7 @@
-﻿namespace ArdalisRating
+﻿namespace ArdalisRating;
+
+public interface IPolicySource
 {
-    public interface IPolicySource
-    {
-        string GetPolicyFromSource();
-    }
+    Task<string> GetPolicyFromSourceAsync(CancellationToken cancellationToken = default);
+    string GetPolicyFromSource(); // Keep for backward compatibility
 }
